@@ -89,12 +89,12 @@ class sfVkontakteMelody extends sfMelody2 {
 
 		$access_token = isset($params['access_token']) ? $params['access_token'] : null;
 
-		if (is_null($access_token) && $this->getLogger()) {
+		if (is_null($access_token)) {
 			$error = sprintf('{OAuth} access token failed - %s returns %s', $this->getName(), print_r($params, true));
-			$this->getLogger()->err($error);
-		} elseif ($this->getLogger()) {
+			sfContext::getInstance()->getLogger()->err($error);
+		} else {
 			$message = sprintf('{OAuth} %s return %s', $this->getName(), print_r($params, true));
-			$this->getLogger()->info($message);
+			sfContext::getInstance()->getLogger()->info($message);
 		}
 
 		$token = new Token();
